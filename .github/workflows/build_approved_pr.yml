@@ -1,9 +1,8 @@
-name: Build PR
+name: Build Approved PR
 
 on:
-  pull_request:
-    branches: ["main"]
-    types: [ready_for_review, synchronize]
+  pull_request_review:
+    types: [submitted]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,8 +10,8 @@ concurrency:
 
 jobs:
   build:
-    if: github.event.pull_request.draft == false
-    name: Build PR
+    if: github.event.review.state == 'approved'
+    name: Build Approved PR
     runs-on: ubuntu-latest
     steps:
       - name: Build
