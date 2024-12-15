@@ -28,8 +28,10 @@ jobs:
       - name: Build
         run: |
           echo "ref =" ${{ github.ref }}
+          echo "tree begin"
           tree -a
-          [ -f build/a ] || touch build/a
+          echo "tree end"
+          mkdir -p build && touch build/a
           echo "restored from cache =" `cat build/a`
           date > build/a
           echo "Build success"
