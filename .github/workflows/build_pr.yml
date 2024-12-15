@@ -59,6 +59,7 @@ jobs:
           # cat build/a
           # echo "### written build/a end"
 
+          mkdir -p build
           echo "## start: from cache"
           tree build
           echo "## end: from cache"
