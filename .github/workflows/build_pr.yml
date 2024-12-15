@@ -43,9 +43,12 @@ jobs:
           tree
           echo "### tree end"
           mkdir -p build && touch build/a
-          echo "### build/a begin"
+          echo "### old build/a begin"
           cat build/a
-          echo "### build/a end"
+          echo "### old build/a end"
           git fetch --unshallow
           git log --oneline > build/a
+          echo "### written build/a begin"
+          cat build/a
+          echo "### written build/a end"
           echo "Build success"
