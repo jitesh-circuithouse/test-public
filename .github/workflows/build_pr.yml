@@ -17,6 +17,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
+        with:
+          # note: none of these work, but are supposed to work as per docs (TODO)
+          fetch-tags: true
+          filter: tree:0
+          fetch-depth: 0 # (no history limit)
+
+      - name: Fetch tags
+        run: git fetch --tags --depth 1
 
       - name: Sync build cache
         uses: actions/cache@v4.2.0
