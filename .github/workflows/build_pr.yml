@@ -16,4 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        run: echo "Build success"
+        run: |
+          echo "ref = " ${{ github.ref }}
+          echo "Build success"
