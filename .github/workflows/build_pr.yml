@@ -35,7 +35,7 @@ jobs:
         with:
           # key: ${{ github.ref }}-${{ steps.epoch.outputs.value }}
           # key: ${{ github.ref }}-${{ hashFiles('build/a','build/b') }}
-          key: ${{ github.ref }}-${{ hashFiles('build/**/*','build/*/*') }}
+          key: ${{ github.ref }}-${{ hashFiles('build/**/*.*','build/*/*.*') }}
           restore-keys: |
             ${{ github.ref }}
             # refs/pull/1
