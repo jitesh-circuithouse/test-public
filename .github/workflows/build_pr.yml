@@ -15,5 +15,61 @@ jobs:
     name: Build PR
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          # note: none of these work, but are supposed to work as per docs (TODO)
+          fetch-tags: true
+          filter: tree:0
+          fetch-depth: 0 # (no history limit)
+
+      - name: Fetch tags
+        run: git fetch --tags --depth 1
+
+      # - name: Determine epoch time
+      #   id: epoch
+      #   run: echo "value=`date +%s`" >> $GITHUB_OUTPUT
+
+      - name: Sync build cache
+        uses: actions/cache@v4.2.0
+        with:
+          # key: ${{ github.ref }}-${{ steps.epoch.outputs.value }}
+          # key: ${{ github.ref }}-${{ hashFiles('build/a','build/b') }}
+          key: ${{ github.ref }}-${{ hashFiles('app/**/*') }}
+          restore-keys: |
+            ${{ github.ref }}
+            # refs/pull/1
+            refs/pull
+          path: |
+            build
+
       - name: Build
-        run: echo "Build success"
+        run: |
+          echo "ref =" ${{ github.ref }}
+
+          # echo "### tree begin"
+          # tree
+          # echo "### tree end"
+          # mkdir -p build && touch build/a
+          # echo "### old build/a begin"
+          # cat build/a
+          # echo "### old build/a end"
+          # git fetch --unshallow
+          # git log --oneline > build/a
+          # echo "### written build/a begin"
+          # cat build/a
+          # echo "### written build/a end"
+
+          mkdir -p build
+          echo "## start: from cache"
+          tree build
+          echo "## end: from cache"
+          sum=`md5sum app/src/main/a | awk '{print $1}'`
+          echo sum=$sum
+          # mkdir -p build/$sum
+          # echo $sum > build/$sum/$sum.out
+          echo $sum > build/$sum.out
+          echo "## start: to cache"
+          tree build
+          echo "## end: to cache"
+          echo "Build success"
