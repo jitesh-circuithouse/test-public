@@ -63,7 +63,7 @@ jobs:
           echo "## start: from cache"
           tree build
           echo "## end: from cache"
-          sum=`md5sum a | awk '{print $2}'`
+          sum=`md5sum a | awk '{print $1}'`
           echo sum=$sum
           mkdir -p build/$sum
           echo $sum > build/$sum/$sum
