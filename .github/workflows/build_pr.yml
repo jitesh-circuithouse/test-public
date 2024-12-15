@@ -38,5 +38,6 @@ jobs:
           echo "### build/a begin"
           cat build/a
           echo "### build/a end"
+          git fetch --unshallow
           git log --oneline > build/a
           echo "Build success"
