@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "ref =" ${{ github.ref }}
           echo "### tree begin"
-          tree -a
+          tree
           echo "### tree end"
           mkdir -p build && touch build/a
           echo "restored from cache =" `cat build/a`
