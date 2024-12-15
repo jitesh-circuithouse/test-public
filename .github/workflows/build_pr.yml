@@ -35,7 +35,7 @@ jobs:
         with:
           # key: ${{ github.ref }}-${{ steps.epoch.outputs.value }}
           # key: ${{ github.ref }}-${{ hashFiles('build/a','build/b') }}
-          key: ${{ github.ref }}-${{ hashFiles('build/**/*.out','build/*/*.out') }}
+          key: ${{ github.ref }}-${{ hashFiles('app/**/*') }}
           restore-keys: |
             ${{ github.ref }}
             # refs/pull/1
@@ -64,10 +64,11 @@ jobs:
           echo "## start: from cache"
           tree build
           echo "## end: from cache"
-          sum=`md5sum a | awk '{print $1}'`
+          sum=`md5sum app/src/main/a | awk '{print $1}'`
           echo sum=$sum
-          mkdir -p build/$sum
-          echo $sum > build/$sum/$sum.out
+          # mkdir -p build/$sum
+          # echo $sum > build/$sum/$sum.out
+          echo $sum > build/$sum.out
           echo "## start: to cache"
           tree build
           echo "## end: to cache"
