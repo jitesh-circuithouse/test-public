@@ -26,10 +26,14 @@ jobs:
       - name: Fetch tags
         run: git fetch --tags --depth 1
 
+      - name: Determine epoch time
+        id: epoch
+        run: echo "value=`date +%s`" >> $GITHUB_OUTPUT
+
       - name: Sync build cache
         uses: actions/cache@v4.2.0
         with:
-          key: ${{ github.ref }}-`date +%s`
+          key: ${{ github.ref }}-${{ steps.epoch.outputs.value }}
           restore-keys: |
             refs/pull/1
             refs/pull
