@@ -33,5 +33,5 @@ jobs:
           echo "### tree end"
           mkdir -p build && touch build/a
           echo "restored from cache =" `cat build/a`
-          date > build/a
+          git log -1 --oneline > build/a
           echo "Build success"
