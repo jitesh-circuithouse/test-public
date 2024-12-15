@@ -45,16 +45,28 @@ jobs:
       - name: Build
         run: |
           echo "ref =" ${{ github.ref }}
-          echo "### tree begin"
-          tree
-          echo "### tree end"
-          mkdir -p build && touch build/a
-          echo "### old build/a begin"
-          cat build/a
-          echo "### old build/a end"
-          git fetch --unshallow
-          git log --oneline > build/a
-          echo "### written build/a begin"
-          cat build/a
-          echo "### written build/a end"
+
+          # echo "### tree begin"
+          # tree
+          # echo "### tree end"
+          # mkdir -p build && touch build/a
+          # echo "### old build/a begin"
+          # cat build/a
+          # echo "### old build/a end"
+          # git fetch --unshallow
+          # git log --oneline > build/a
+          # echo "### written build/a begin"
+          # cat build/a
+          # echo "### written build/a end"
+
+          echo "## start: from cache"
+          echo tree build
+          echo "## end: from cache"
+          sum=`md5sum a`
+          echo sum=$sum
+          mkdir -p build/$sum
+          echo $sum > build/$sum/$sum
+          echo "## start: to cache"
+          echo tree build
+          echo "## end: to cache"
           echo "Build success"
