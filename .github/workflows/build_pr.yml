@@ -35,6 +35,8 @@ jobs:
           tree
           echo "### tree end"
           mkdir -p build && touch build/a
-          echo "restored from cache =" `cat build/a`
-          git log -1 --oneline > build/a
+          echo "### build/a begin"
+          cat build/a
+          echo "### build/a end"
+          git log --oneline > build/a
           echo "Build success"
