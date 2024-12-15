@@ -15,6 +15,9 @@ jobs:
     name: Build PR
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
       - name: Sync build cache
         uses: actions/cache@v4.2.0
         with:
